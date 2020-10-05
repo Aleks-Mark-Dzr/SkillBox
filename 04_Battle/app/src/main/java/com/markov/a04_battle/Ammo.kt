@@ -17,9 +17,9 @@ enum class Ammo(
 
 fun Ammo.calculateDamage(): Int {
     val chance = Random.nextInt(100)
-    if (chance > criticalDamageChance) {
-        return 0
+    if (chance < criticalDamageChance) {
+        return damage * criticalDamageRatio
     } else {
-        return damage * criticalDamageRatio / 100
+        return damage
     }
 }
