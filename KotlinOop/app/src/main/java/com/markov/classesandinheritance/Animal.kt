@@ -2,13 +2,12 @@ package com.markov.classesandinheritance
 
 import kotlin.random.Random
 
-class Animal constructor(
+abstract class Animal constructor(
 
     e: Int,
     w: Int,
-    private val maximumAge: Int = 15,
     val name: String = "Jey"
-) {
+) : AgedAnimal() {
     var energy: Int = e
         private set
     var weight: Int = w
@@ -16,10 +15,10 @@ class Animal constructor(
     var age: Int = 0
         private set
     val isTooOld: Boolean
-        get() = age >= maximumAge
+        get() = age >= maxAge
 
     fun sleep() {
-        if (isTooOld || energy == 0 || weight <= 1) {
+        if (isTooOld || energy <= 0 || weight <= 1) {
             return
         }
 
@@ -29,7 +28,7 @@ class Animal constructor(
     }
 
     fun eat() {
-        if (isTooOld || energy == 0 || weight <= 1) {
+        if (isTooOld || energy <= 0 || weight <= 1) {
             return
         }
 
@@ -45,8 +44,8 @@ class Animal constructor(
         }
     }
 
-    fun move() {
-        if (isTooOld || energy == 0 || weight <= 1) {
+    open fun move() {
+        if (isTooOld || energy <= 0 || weight <= 1) {
             return
         }
 
@@ -56,18 +55,11 @@ class Animal constructor(
         println("$name двигается")
     }
 
-    fun makeChild(): Animal {
-        val childEnergy = Random.nextInt(10) +1
-        val childWeight = Random.nextInt(5) +1
-        val child = Animal(childEnergy, childWeight, maximumAge, name)
-        println("Было рождено животное ${child.toString()}")
-        return child
-    }
+    abstract fun makeChild(): Animal
 
     override fun toString(): String {
-        return "Animal(maximumAge=$maximumAge, name='$name', energy=$energy, weight=$weight, age=$age)"
+        return "Animal(maximumAge=$maxAge, name='$name', energy=$energy, weight=$weight, age=$age)"
     }
-
 
 }
 
