@@ -2,12 +2,18 @@ package com.markov.classesandinheritance
 
 fun main() {
 
-    val animal: Animal = Animal(100, 5, 15, "Keks")
+    var dog: Animal = Dog (100, 5)
+    val fish = Fish (100, 1)
+    val bird = Bird (100, 3)
 
-    while (!animal.isTooOld){
-        animal.eat()
-        animal.move()
-        animal.sleep()
+    while (true){
+
+        if(dog.isTooOld){
+            dog = dog.makeChild()
+        } else {
+            dog.eat()
+            dog.move()
+            dog.sleep()
+        }
     }
-    animal.makeChild()
 }

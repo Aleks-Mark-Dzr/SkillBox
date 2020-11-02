@@ -55,7 +55,11 @@ abstract class Animal constructor(
         println("$name двигается")
     }
 
-    abstract fun makeChild(): Animal
+    open fun makeChild(): Animal {
+        return object: Animal (100, 5, "Jey"){
+            override val maxAge = this@Animal.maxAge
+        }
+    }
 
     override fun toString(): String {
         return "Animal(maximumAge=$maxAge, name='$name', energy=$energy, weight=$weight, age=$age)"

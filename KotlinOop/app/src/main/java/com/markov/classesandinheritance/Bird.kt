@@ -5,7 +5,7 @@ import kotlin.random.Random
 class Bird constructor(
     e: Int,
     w: Int
-): Animal(e, w, "Ptaha") {
+): Animal(e, w, "Ptaha"), Soundable {
 
     override val maxAge = 20
 
@@ -20,6 +20,10 @@ class Bird constructor(
         val child = Bird(childEnergy, childWeight)
         println("Было рождено животное ${this.toString()}")
         return child
+    }
+
+    override fun makeSound() {
+        println("Чик-чирик")
     }
 
 }
