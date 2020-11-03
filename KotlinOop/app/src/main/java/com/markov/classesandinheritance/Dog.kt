@@ -5,7 +5,7 @@ import kotlin.random.Random
 class Dog constructor(
     e: Int,
     w: Int
-) : Animal(100, 5, "Muhtar"), Soundable {
+) : Animal(e, w, "Muhtar"), Soundable {
 
     override val maxAge = 22
 

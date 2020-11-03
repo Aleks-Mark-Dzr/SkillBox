@@ -4,8 +4,8 @@ import kotlin.random.Random
 
 abstract class Animal constructor(
 
-    e: Int,
-    w: Int,
+    val e: Int,
+    val w: Int,
     val name: String = "Jey"
 ) : AgedAnimal() {
     var energy: Int = e
@@ -56,7 +56,7 @@ abstract class Animal constructor(
     }
 
     open fun makeChild(): Animal {
-        return object: Animal (100, 5, "Jey"){
+        return object: Animal (e, w, "Jey"){
             override val maxAge = this@Animal.maxAge
         }
     }
