@@ -3,23 +3,23 @@ package com.markov.classesandinheritance
 import kotlin.random.Random
 
 fun main() {
-
-    var dog: Animal = Dog(100, 5)
-    var fish = Fish(100, 1)
-    var bird = Bird(100, 3)
-    var bird2 = Bird(130, 6)
-    var bird3 = Bird(120, 7)
-    var bird4 = Bird(135, 6)
-    var bird5 = Bird(125, 5)
-    var fish2 = Fish(120, 5)
-    var fish3 = Fish(130, 8)
-    var dog2 = Dog(135, 7)
-    var panda = object : Animal(130, 100, "Miha") {}
-    var tiger = object : Animal(135, 80, "Kisa") {}
-
+    
     var zoo = Zoo()
     zoo.animalList =
-        mutableListOf(dog, fish, bird, bird2, bird3, bird4, bird5, fish2, fish3, dog2, panda, tiger)
+        mutableListOf(
+            Dog (100, 5),
+            Fish (100, 3),
+            Bird (120, 4),
+            Bird (120, 3),
+            Bird (125, 5),
+            Bird (110, 3),
+            Bird (124, 4),
+            Fish (115, 4),
+            Fish (117, 7),
+            Dog (127, 8),
+            object : Animal(130, 100, "Miha") {},
+            object : Animal(135, 80, "Kisa") {}
+        )
 
     val N = 3
 
