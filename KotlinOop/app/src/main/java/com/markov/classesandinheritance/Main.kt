@@ -3,7 +3,7 @@ package com.markov.classesandinheritance
 import kotlin.random.Random
 
 fun main() {
-    
+
     var zoo = Zoo()
     zoo.animalList =
         mutableListOf(
