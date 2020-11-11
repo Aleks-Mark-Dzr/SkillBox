@@ -1,12 +1,16 @@
 package com.markov.basemethodsandpropertydelegates
 
 fun main() {
-    val user = Person (190, 85, "Nikita")
-    val user2 = Person ( 190, 85, "Nikita")
+
+    val person1 = Person(190, 85, "Nikita")
 
     val hashSet = HashSet <Person>()
-    hashSet.add (user)
-    hashSet.add(user2)
+    hashSet.add (person1)
+    hashSet.add (Person(190, 85, "Nikita"))
+    hashSet.add (Person(180, 75, "Sasha"))
 
     println(hashSet.count())
+    println(hashSet.toString())
+    person1.buyPet()
+    person1.buyPet()
 }
