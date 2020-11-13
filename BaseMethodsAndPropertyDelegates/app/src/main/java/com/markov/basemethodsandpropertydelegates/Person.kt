@@ -10,7 +10,7 @@ class Person constructor(
     val name: String
 
 ) {
-    val pets: HashSet<Animal> by ReadOnlyPropertyDelegate()
+    val pets: HashSet<Animal> by ReadOnlyPropertyDelegate(HashSet<Animal>())
 
     fun buyPet() {
         pets.add(Animal (Random.nextInt(), Random.nextInt(), "Barsik"))
