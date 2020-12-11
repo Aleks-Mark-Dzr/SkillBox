@@ -17,7 +17,6 @@ abstract class AbstractWeapon(
     }
 
     fun getAmmo(): Ammo {
-        currentListAmmo.last()
         return currentListAmmo.removeLast()
     }
 
