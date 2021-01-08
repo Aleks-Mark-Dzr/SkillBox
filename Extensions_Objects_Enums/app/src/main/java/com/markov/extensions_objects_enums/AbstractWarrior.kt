@@ -8,19 +8,36 @@ abstract class AbstractWarrior(
 ) : Warrior {
 
     var currentHealthLevel: Int = maxHealth
+        set(value) {
+            if(value <= 0) {
+                isKilled = true
+            }
+            field = value
+        }
 
     override fun toAttack(warrior: Warrior) {
         return if (!weapon.availabilityAmmo) {
             weapon.recharge()
         } else {
-            for (i in 1..weapon.maxQuantityAmmo){
-                val ammo = weapon.getAmmo()
-                if (hitProbability >= warrior.chanceToAvoidBeingHit) {
-                    val damage: Int = ammo.calculateDamage()
-                    warrior.takеDamage(damage)
+            if (weapon.fireType is FireType.SingleShot) {
+                takeDamageForWarrior(warrior)
+            } else {
+                val firingBurstSize =
+                    (weapon.fireType as? FireType.BurstShooting)?.firingBurstSize ?: 1
+                for (i in 1..firingBurstSize) {
+                    if (weapon.availabilityAmmo) {
+                        takeDamageForWarrior(warrior)
+                    }
                 }
-
             }
+        }
+    }
+
+    fun takeDamageForWarrior(warrior: Warrior) {
+        val current = weapon.getAmmo()
+        if (hitProbability >= warrior.chanceToAvoidBeingHit && current != null) {
+            val damage: Int = current.calculateDamage()
+            warrior.takеDamage(damage)
         }
     }
 

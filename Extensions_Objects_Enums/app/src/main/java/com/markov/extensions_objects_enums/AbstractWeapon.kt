@@ -7,25 +7,37 @@ abstract class AbstractWeapon(
     var currentListAmmo: MutableList<Ammo> = mutableListOf<Ammo>()
     val availabilityAmmo: Boolean = currentListAmmo.isNotEmpty()
 
+    init {
+        recharge()
+    }
+
     abstract fun createAmmo(): Ammo
 
     fun recharge() {
+//        println("$this recharge")
+//        println("Количество патронов ${currentListAmmo.size}")
         currentListAmmo = mutableListOf()
         for (i in 1..maxQuantityAmmo) {
             currentListAmmo.add(createAmmo())
         }
+//        println("Количество патронов ${currentListAmmo.size}")
     }
 
-    fun getAmmo(): Ammo {
+    fun getAmmo(): Ammo? {
+//        println("$this getAmmo")
+//        println("Количество патронов ${currentListAmmo.size}")
+        if (currentListAmmo.isEmpty()) {
+            recharge()
+            return null
+        } else
         return currentListAmmo.removeLast()
     }
 
     object Weapons {
 
-        val pistol: AbstractWeapon = AbstractWeapon.Weapons.createPistol()
-
         fun createPistol(): AbstractWeapon {
-            return object: AbstractWeapon(20, FireType.SingleShot){
+//            println("CreatePictol, maxQuantityAmmo = 20")
+            return object : AbstractWeapon(20, FireType.SingleShot) {
                 override fun createAmmo(): Ammo {
                     return Ammo.AMMO762x39BP
                 }
@@ -34,8 +46,9 @@ abstract class AbstractWeapon(
 
         }
 
-        fun createFifle(): AbstractWeapon {
-            return object: AbstractWeapon (10, FireType.SingleShot) {
+        fun createRifle(): AbstractWeapon {
+//            println("CreateRifle, maxQuantityAmmo = 10")
+            return object : AbstractWeapon(10, FireType.SingleShot) {
                 override fun createAmmo(): Ammo {
                     return Ammo.AMMO762x39PS
                 }
@@ -44,7 +57,8 @@ abstract class AbstractWeapon(
         }
 
         fun createSniperRifle(): AbstractWeapon {
-            return object: AbstractWeapon(10, FireType.SingleShot){
+//            println("CreateSniperRifle, maxQuantityAmmo = 10")
+            return object : AbstractWeapon(10, FireType.SingleShot) {
                 override fun createAmmo(): Ammo {
                     return Ammo.AMMO762x39BP
                 }
@@ -53,7 +67,8 @@ abstract class AbstractWeapon(
         }
 
         fun createMachineGun(): AbstractWeapon {
-            return object: AbstractWeapon(100, FireType.BurstShooting(firingBurstSize = 3)){
+//            println("CreateMachineGun, maxQuantityAmmo = 100")
+            return object : AbstractWeapon(100, FireType.BurstShooting(firingBurstSize = 3)) {
                 override fun createAmmo(): Ammo {
                     return Ammo.AMMO762x39NR
                 }
