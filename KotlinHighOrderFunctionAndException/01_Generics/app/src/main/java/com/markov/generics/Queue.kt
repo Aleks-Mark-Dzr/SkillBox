@@ -12,9 +12,7 @@ class Queue<T> {
         if (queue.isEmpty()) {
             return null
         } else {
-            val item = queue.get(0)
-            queue.remove(item)
-            return item
+            return queue.removeAt(0)
         }
     }
 }
