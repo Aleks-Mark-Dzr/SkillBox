@@ -15,4 +15,8 @@ class Queue<T> {
             return queue.removeAt(0)
         }
     }
+
+    fun filter (filterType: (a: T) -> Boolean): MutableList<T> {
+        return queue.filter { filterType(it) }.toMutableList()
+    }
 }
