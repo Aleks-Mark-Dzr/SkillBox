@@ -13,7 +13,7 @@ fun main() {
     name.enqueue(4)
 
     name.filter { it % 2.0 == 0.0 }
-    name.filter { filetrFunction(it) }
+    name.filter (:: filetrFunction)
 }
 
 fun <T : Number> getEvenNumbers(numbers: List<T>): List<T> {
