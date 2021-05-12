@@ -6,8 +6,8 @@ class Wheel {
     var pressure: Double = 0.0
         private set
 
-    var negativePressure: Double < 0.0
-    var tooMuchPressure: Double > 10.0
+    var negativePressure: Double = 0.0
+    var tooMuchPressure: Double = 10.0
 
     class TooHighPressure : Exception()
 
@@ -17,11 +17,11 @@ class Wheel {
     
     fun setPressure(value: Double) {
 
-        checkPessure()
-
-        if (value = negativePressure || value = tooMuchPressure) {
+        if (value < negativePressure || value > tooMuchPressure) {
             throw IncorrectPressure()
         }
+
+        checkPessure(value)
 
         this.pressure = value
     }
