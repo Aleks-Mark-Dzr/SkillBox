@@ -26,7 +26,7 @@ class Team(
         return getCurrentHealth() > 0
     }
 
-    fun getCurrentHealth(): Int{
+    fun getCurrentHealth(): Int {
         return team.filter { it.currentHealthLevel > 0 }.sumBy { it.currentHealthLevel }
     }
 }
