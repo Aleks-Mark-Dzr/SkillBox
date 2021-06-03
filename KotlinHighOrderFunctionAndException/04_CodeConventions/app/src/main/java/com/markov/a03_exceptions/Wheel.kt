@@ -3,7 +3,7 @@ package com.markov.a03_exceptions
 import kotlin.math.sign
 
 class Wheel {
-    var pressure: Double = 0.0
+    var pressure: Double= 0.0
         private set
 
     var negativePressure: Double = 0.0
