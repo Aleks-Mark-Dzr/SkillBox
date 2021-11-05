@@ -20,11 +20,22 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.textEmailAddress.addTextChangedListener(object: TextWatcher{
+        binding.textEmailAddress.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                binding.textEmailAddress.text = takeIf { it.isNotBlank }
+                var emailValid = false
+                val isNotBlank = p0?.isNotBlank()?:false
+                val at = p0?.contains('@')?:false
+                val space = p0?.contains(' ')?:false
+
+                if (isNotBlank && at && !space) {
+                    emailValid = true
+                    Toast.makeText(view.context, "Адрес корректен", Toast.LENGTH_SHORT).show()
+
+                } else {
+                    Toast.makeText(view.context, "Адрес некорректен", Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -34,9 +45,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.textEmailAddress.setOnClickListener{
-            Toast.makeText(this, "Введите email", Toast.LENGTH_SHORT).show()
-
-        }
+//        binding.textEmailAddress.setOnClickListener {
+//            Toast.makeText(this, "Введите email", Toast.LENGTH_SHORT).show()
+//
+//        }
     }
 }
