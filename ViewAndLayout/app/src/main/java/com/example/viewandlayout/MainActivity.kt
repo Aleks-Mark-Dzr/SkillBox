@@ -1,17 +1,21 @@
 package com.example.viewandlayout
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View.inflate
+import android.util.Log
+import android.widget.CheckBox
 import android.widget.Toast
 import com.example.viewandlayout.databinding.ActivityMainBinding
-import com.example.viewandlayout.databinding.ActivityMainBinding.inflate
+import android.widget.CompoundButton
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    var isEmailValid: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,30 +28,33 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                var emailValid = false
-                val isNotBlank = p0?.isNotBlank()?:false
-                val at = p0?.contains('@')?:false
-                val space = p0?.contains(' ')?:false
+//                var isEmailValid = false
+                val isNotBlank = p0?.isNotBlank() ?: false
+                val isAt = p0?.contains('@') ?: false
+                val isSpace = p0?.contains(' ') ?: false
 
-                if (isNotBlank && at && !space) {
-                    emailValid = true
-                    Toast.makeText(view.context, "Адрес корректен", Toast.LENGTH_SHORT).show()
+                if (isNotBlank && isAt && !isSpace) {
+                    isEmailValid = true
+                    Toast.makeText(this@MainActivity, "Адрес корректен", Toast.LENGTH_SHORT).show()
 
                 } else {
-                    Toast.makeText(view.context, "Адрес некорректен", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Адрес некорректен", Toast.LENGTH_SHORT)
+                        .show()
                 }
+                registrationEvailable()
             }
 
             override fun afterTextChanged(p0: Editable?) {}
-
         })
 
-
-
-
-//        binding.textEmailAddress.setOnClickListener {
-//            Toast.makeText(this, "Введите email", Toast.LENGTH_SHORT).show()
-//
-//        }
     }
+    fun registrationEvailable() {
+        var isPasswordValid = binding.textPassword.text.isNotBlank()
+        var isChecked = binding.checkBox.isChecked
+
+        if (isEmailValid && isPasswordValid && isChecked) {
+            binding.makeLoginButton.isEnabled = true
+        }
+    }
+
 }
