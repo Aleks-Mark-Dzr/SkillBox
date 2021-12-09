@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ViewAndLayout</string>
+    <string name="operation_complete">Операция завершена</string>
+</resources>
