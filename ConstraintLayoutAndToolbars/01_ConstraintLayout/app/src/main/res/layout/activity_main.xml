@@ -23,7 +23,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Регистрация."
         app:layout_constraintBottom_toTopOf="@+id/textEmailAddress"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
@@ -51,7 +50,6 @@
         android:hint="Введите пароль"
         app:layout_constraintBottom_toTopOf="@+id/makeLoginButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/textEmailAddress" />
 
@@ -73,10 +71,10 @@
         android:baselineAligned="false"
         android:enabled="false"
         android:text="Регистрация"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
-        tools:layout_editor_absoluteY="519dp" />
+        app:layout_constraintStart_toEndOf="@+id/checkBox" />
 
     <ProgressBar
         android:id="@+id/loginProgress"
