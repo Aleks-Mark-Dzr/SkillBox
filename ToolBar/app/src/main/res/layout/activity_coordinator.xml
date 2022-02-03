@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            app:layout_scrollFlags="scroll|enterAlways"-->
+<!--            style="@style/ToolbarStyle"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?actionBarSize"-->
+<!--            android:background="@color/purple_500"-->
+<!--            app:title="@string/app_name"-->
+<!--            tools:ignore="MissingConstraints" />-->
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <TextView
+            android:id="@+id/longTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="start kakfsa asjdbnf asdkj vdvlk jdfnsdkjfnks djfnkj vnjk nkjfnaksjdnfksdjf nkasjdfnakjnkakfsa asjdbnf asdkj vdvlk jdfnsdkjfnks djfnkj vnjk nkjfnaksjdnfksdjf nkasjdfnakjnkakfsa asjdbnf asdkj vdvlk jdfnsdkjfnks djfnkj vnjk nkjfnaksjdnfksdjf nkasjdfnakjn"
+            android:textSize="50sp"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        android:layout_gravity="bottom"
+        android:text="Bottom button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

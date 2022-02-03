@@ -2,7 +2,9 @@ package com.example.a02_toolbar
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import com.example.a02_toolbar.databinding.ActivityMainBinding
 
 
@@ -40,5 +42,30 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+        val searchItem = binding.toolbar.menu.findItem(R.id.action_search)
+        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+                binding.expandTextView.text = "search expanded"
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+                binding.expandTextView.text = "search collapse"
+                return true
+            }
+
+        })
+
+        (searchItem.actionView as SearchView).setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+//                binding.longTextView.filters.contains(newText?:)
+                return true
+            }
+
+        })
     }
 }

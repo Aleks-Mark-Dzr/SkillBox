@@ -10,6 +10,12 @@
         android:id="@+id/action_2"
         android:icon="@drawable/ic_baseline_attach"
         android:title="@string/action_2"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_search"
+        android:title="@string/action_search"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:icon="@drawable/ic_baseline_search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
 </menu>
