@@ -52,10 +52,6 @@ class MainActivity : AppCompatActivity() {
                         .show()
                 }
                 isRegistrationAvailable()
-                Log.v(tag, "onTextChenged was called")
-                Log.d(tag, "onTextChenged was called")
-                Log.i(tag, "onTextChenged was called")
-                Log.e(tag, "onTextChenged was called")
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -66,11 +62,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 isRegistrationAvailable()
-
-                Log.v(tag, "textPassword was called")
-                Log.d(tag, "textPassword was called")
-                Log.i(tag, "textPassword was called")
-                Log.e(tag, "textPassword was called")
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -81,17 +72,52 @@ class MainActivity : AppCompatActivity() {
             CompoundButton.OnCheckedChangeListener {
             override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
                 isRegistrationAvailable()
-
-                Log.v(tag, "checkBox was called")
-                Log.d(tag, "checkBox was called")
-                Log.i(tag, "checkBox was called")
-                Log.e(tag, "checkBox was called")
             }
 
         }
 
         )
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.v(tag, "onStart was called")
+        Log.d(tag, "onStart was called")
+        Log.i(tag, "onStart was called")
+        Log.e(tag, "onStart was called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.v(tag, "onResume was called")
+        Log.d(tag, "onResume was called")
+        Log.i(tag, "onResume was called")
+        Log.e(tag, "onResume was called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.v(tag, "onPause was called")
+        Log.d(tag, "onPause was called")
+        Log.i(tag, "onPause was called")
+        Log.e(tag, "onPause was called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.v(tag, "onStop was called")
+        Log.d(tag, "onStop was called")
+        Log.i(tag, "onStop was called")
+        Log.e(tag, "onStop was called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.v(tag, "onDestroy was called")
+        Log.d(tag, "onDestroy was called")
+        Log.i(tag, "onDestroy was called")
+        Log.e(tag, "onDestroy was called")
     }
 
     fun isRegistrationAvailable() {
@@ -112,7 +138,7 @@ class MainActivity : AppCompatActivity() {
         Handler().postDelayed({
             binding.loginProgress.visibility = View.GONE
             binding.makeLoginButton.isEnabled = true
-            Toast.makeText(this@MainActivity,R.string.operation_complete, Toast.LENGTH_SHORT)
+            Toast.makeText(this@MainActivity, R.string.operation_complete, Toast.LENGTH_SHORT)
         }, 2000)
 
     }
