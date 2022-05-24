@@ -3,6 +3,7 @@ package com.example.viewandlayout
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.transition.ChangeTransform
@@ -20,8 +21,14 @@ import java.util.zip.CheckedInputStream
 
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        private const val KEY_FORM = "form"
+    }
+
     private lateinit var binding: ActivityMainBinding
     var isEmailValid: Boolean = false
+    private var state: FormState = FormState(valid = false, email = "", password = "")
 
     private val tag = "MainActivity"
 
@@ -34,6 +41,15 @@ class MainActivity : AppCompatActivity() {
         Log.d(tag, "onCreate was called")
         Log.i(tag, "onCreate was called")
         Log.e(tag, "onCreate was called")
+
+        if (savedInstanceState != null) {
+//            state = savedInstanceState.getParcelable<FormState>(KEY_FORM) ?: error("unexpected state")
+        }
+
+        binding.ANR.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Application not responsing", Toast.LENGTH_SHORT)
+                .show()
+        }
 
         binding.textEmailAddress.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -61,6 +77,7 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                state.password = p0?.toString()?:""
                 isRegistrationAvailable()
             }
 
@@ -74,9 +91,11 @@ class MainActivity : AppCompatActivity() {
                 isRegistrationAvailable()
             }
 
-        }
+        })
 
-        )
+        binding.makeLoginButton.setOnClickListener {
+            makeLogOperation()
+        }
 
     }
 
@@ -94,6 +113,11 @@ class MainActivity : AppCompatActivity() {
         Log.d(tag, "onResume was called")
         Log.i(tag, "onResume was called")
         Log.e(tag, "onResume was called")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+//        outState.putParcelable(KEY_FORM, state)
     }
 
     override fun onPause() {
@@ -126,9 +150,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.makeLoginButton.isEnabled = isEmailValid && isPasswordValid && isChecked
 
-        binding.makeLoginButton.setOnClickListener {
-            makeLogOperation()
-        }
+
     }
 
     private fun makeLogOperation() {
