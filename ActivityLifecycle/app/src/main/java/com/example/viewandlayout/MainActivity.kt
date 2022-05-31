@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     var isEmailValid: Boolean = false
-    private var state: FormState = FormState(valid = false, email = "", password = "")
+    private var state: FormState = FormState(valid = false, message = "")
 
     private val tag = "MainActivity"
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         Log.e(tag, "onCreate was called")
 
         if (savedInstanceState != null) {
-//            state = savedInstanceState.getParcelable<FormState>(KEY_FORM) ?: error("unexpected state")
+            state = savedInstanceState.getParcelable<FormState>(KEY_FORM) ?: error("unexpected state")
         }
 
         binding.ANR.setOnClickListener {
@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                state.password = p0?.toString()?:""
                 isRegistrationAvailable()
             }
 
@@ -117,7 +116,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-//        outState.putParcelable(KEY_FORM, state)
+        outState.putParcelable(KEY_FORM, state)
     }
 
     override fun onPause() {

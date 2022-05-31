@@ -5,20 +5,17 @@ import android.os.Parcelable
 
 data class FormState(
     val valid: Boolean,
-    var email: String,
-    var password: String
+    val message: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readByte() != 0.toByte(),
         parcel.readString() ?: "",
-        parcel.readString() ?: ""
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeByte(if (valid) 1 else 0)
-        parcel.writeString(email)
-        parcel.writeString(password)
+        parcel.writeString(message)
     }
 
     override fun describeContents(): Int {
