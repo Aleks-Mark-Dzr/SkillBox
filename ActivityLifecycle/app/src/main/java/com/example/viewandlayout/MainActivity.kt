@@ -24,11 +24,12 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val KEY_FORM = "form"
+        private var state: FormState = FormState(valid = false, message = "")
     }
 
     private lateinit var binding: ActivityMainBinding
-    var isEmailValid: Boolean = false
-    private var state: FormState = FormState(valid = false, message = "")
+//    var isEmailValid: Boolean = false
+
 
     private val tag = "MainActivity"
 
@@ -43,7 +44,14 @@ class MainActivity : AppCompatActivity() {
         Log.e(tag, "onCreate was called")
 
         if (savedInstanceState != null) {
-            state = savedInstanceState.getParcelable<FormState>(KEY_FORM) ?: error("unexpected state")
+            state =
+                savedInstanceState.getParcelable<FormState>(KEY_FORM) ?: error("unexpected state")
+            if (state.valid) {
+
+            } else {
+                Toast.makeText(this@MainActivity, state.message, Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
 
         binding.ANR.setOnClickListener {
@@ -60,12 +68,12 @@ class MainActivity : AppCompatActivity() {
                 val isSpace = p0?.contains(' ') ?: false
 
                 if (isNotBlank && isAt && !isSpace) {
-                    isEmailValid = true
+                    state.valid = true
                     Toast.makeText(this@MainActivity, "Адрес корректен", Toast.LENGTH_SHORT).show()
 
                 } else {
-                    Toast.makeText(this@MainActivity, "Адрес некорректен", Toast.LENGTH_SHORT)
-                        .show()
+                    state.message = "адрес некорректен"
+                    Toast.makeText(this@MainActivity, state.message, Toast.LENGTH_SHORT).show()
                 }
                 isRegistrationAvailable()
             }
@@ -147,7 +155,7 @@ class MainActivity : AppCompatActivity() {
         var isPasswordValid = binding.textPassword.text.isNotBlank()
         var isChecked = binding.checkBox.isChecked
 
-        binding.makeLoginButton.isEnabled = isEmailValid && isPasswordValid && isChecked
+        binding.makeLoginButton.isEnabled = state.valid && isPasswordValid && isChecked
 
 
     }
