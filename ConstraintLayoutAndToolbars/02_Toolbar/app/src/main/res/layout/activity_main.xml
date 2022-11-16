@@ -5,23 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_500"
-        app:navigationIcon="@drawable/ic_baseline_arrow_back"
-        app:title="@string/app_name"
-        style="@style/ToolbarStyle"
-        app:menu="@menu/menu_toolbar"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints">
 
-    <TextView
-        android:id="@+id/longTextView"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_500"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back"
+            app:title="@string/app_name"
+            style="@style/ToolbarStyle"
+            app:menu="@menu/menu_toolbar"
+            tools:ignore="MissingConstraints" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="On seashore far a green oak towers,
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/longTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="On seashore far a green oak towers,
 And to it with a gold chain bound,
 A learned cat whiles away the hours
 By walking slowly round and round.
@@ -57,9 +70,11 @@ And drank of sweet mead at my leisure,
 Told me full many a tale… With pleasure
 These tales of his do I recall
 And here and now will share with all…"
-        android:textSize="30sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/expandTextView"
@@ -73,6 +88,8 @@ And here and now will share with all…"
         android:id="@+id/searchResultTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/expandTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

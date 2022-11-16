@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-//                binding.longTextView.filters.contains(newText?:)
+//                binding.longTextView.filters.contains(newText?:"")
                 return true
             }
 
