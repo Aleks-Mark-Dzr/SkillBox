@@ -3,26 +3,24 @@ package com.example.activity_09
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.activity_09.databinding.ActivityMainBinding
-import com.example.activity_09.databinding.ActivitySecondBinding
+import com.example.activity_09.databinding.SecondActivityBinding
 
-class SecondActivity: AppCompatActivity() {
+class SecondActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySecondBinding
+    private lateinit var binding: SecondActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         Log.d("LifecycleTest", "SecondActivity_onCreate_${hashCode()}")
 
-        binding = ActivitySecondBinding.inflate(layoutInflater)
+        binding = SecondActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         super.onCreate(savedInstanceState)
         val message: String? = intent.getStringExtra(KEY_MESSAGE)
-        Log.d("tag", message?:"")
+        Log.d("tag", message ?: "")
         binding.messageTextView.setText(message)
     }
 
@@ -55,7 +53,7 @@ class SecondActivity: AppCompatActivity() {
         private const val KEY_MESSAGE = "message key"
 
         fun getIntent(context: Context, message: String?): Intent {
-            return Intent(context,SecondActivity::class.java)
+            return Intent(context, SecondActivity::class.java)
                 .putExtra(KEY_MESSAGE, message)
         }
     }

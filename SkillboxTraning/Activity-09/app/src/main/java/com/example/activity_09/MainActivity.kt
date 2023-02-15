@@ -1,38 +1,25 @@
 package com.example.activity_09
 
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-//import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-//import androidx.navigation.findNavController
 import com.example.activity_09.databinding.ActivityMainBinding
 
-//import androidx.navigation.ui.navigateUp
-//import androidx.navigation.ui.setupActionBarWithNavController
-//import android.view.Menu
-//import android.view.MenuItem
-
-
-@Suppress("DEPRECATION", "UNUSED_VARIABLE")
 class MainActivity : AppCompatActivity() {
 
-    //https://skillbox.ru/course/profission-android-developer/
-    //https://skillbox.ru/course/weblayout/
-
-    //    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+//    https://skillbox.ru/course/profession-android-developer-2021/
+//    https://skillbox.ru/course/weblayout-upsale/
 
     private val cameraLauncher: Unit =
         prepareCall(ActivityResultContracts.TakePicture()) { bitmap ->
@@ -40,9 +27,9 @@ class MainActivity : AppCompatActivity() {
             binding.resultPhotoImageView.setImageBitmap(bitmap)
         }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
         Log.d("LifecycleTest", "MainActivity_onCreate_${hashCode()}")
 
@@ -61,25 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.sendEmailButton.setOnClickListener {
-            val emailAddress = binding.emailAddressEditText.text.toString()
-            val emailSubject = binding.subjectEditText.text.toString()
-
-            val isEmailValid: Boolean = Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()
-
-            if (!isEmailValid) {
-                toast("Enter valid email address")
-            } else {
-                val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-                    data = Uri.parse("mailto:")
-                    putExtra(Intent.EXTRA_EMAIL, arrayOf(emailAddress))
-                    putExtra(Intent.EXTRA_SUBJECT, emailSubject)
-                }
-                if (emailIntent.resolveActivity(packageManager) != null) {
-                    startActivity(emailIntent)
-                } else {
-                    toast("No component to handle intent")
-                }
-            }
+            dispatchEmailIntent()
         }
     }
 
@@ -103,6 +72,28 @@ class MainActivity : AppCompatActivity() {
             )
         } else {
             cameraLauncher
+        }
+    }
+
+    private fun dispatchEmailIntent(){
+        val emailAddress = binding.emailAddressEditText.text.toString()
+        val emailSubject = binding.subjectEditText.text.toString()
+
+        val isEmailValid: Boolean = Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()
+
+        if (!isEmailValid) {
+            toast("Enter valid email address")
+        } else {
+            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(emailAddress))
+                putExtra(Intent.EXTRA_SUBJECT, emailSubject)
+            }
+            if (emailIntent.resolveActivity(packageManager) != null) {
+                startActivity(emailIntent)
+            } else {
+                toast("No component to handle intent")
+            }
         }
     }
 
