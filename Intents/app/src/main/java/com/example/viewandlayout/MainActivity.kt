@@ -1,6 +1,7 @@
 package com.example.viewandlayout
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.PersistableBundle
@@ -105,6 +106,15 @@ class MainActivity : AppCompatActivity() {
             makeLogOperation()
         }
 
+        binding.phoneNumberText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                dialNumberPhone()
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
     }
 
     override fun onStart() {
@@ -170,6 +180,12 @@ class MainActivity : AppCompatActivity() {
             binding.makeLoginButton.isEnabled = true
             Toast.makeText(this@MainActivity, R.string.operation_complete, Toast.LENGTH_SHORT)
         }, 2000)
+    }
 
+    fun dialNumberPhone() {
+        binding.dialButton.setOnClickListener {
+            val phoneNumber = binding.phoneNumberText.text.toString()
+            val dialNumber = Intent(Intent.ACTION_DIAL)
+        }
     }
 }

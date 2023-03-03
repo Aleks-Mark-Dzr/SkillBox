@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Регистрация."
-        app:layout_constraintBottom_toTopOf="@+id/textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/ANR"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -45,7 +45,6 @@
         android:id="@+id/textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:hint="Введите адрес свой почты"
         app:layout_constraintBottom_toTopOf="@+id/textPassword"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
@@ -57,7 +56,6 @@
         android:id="@+id/textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:hint="Введите пароль"
         app:layout_constraintBottom_toTopOf="@+id/makeLoginButton"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
@@ -82,10 +80,11 @@
         android:baselineAligned="false"
         android:enabled="false"
         android:text="Регистрация"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/phoneNumberText"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/checkBox" />
+        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/textPassword" />
 
     <ProgressBar
         android:id="@+id/loginProgress"
@@ -110,6 +109,26 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
+
+    <EditText
+        android:id="@+id/phoneNumberText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите номер телефона"
+        app:layout_constraintBottom_toTopOf="@id/dialButton"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/makeLoginButton" />
+
+    <Button
+        android:id="@+id/dialButton"
+        android:text="Набрать номер"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberText"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
