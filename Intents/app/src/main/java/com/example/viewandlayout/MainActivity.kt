@@ -2,26 +2,21 @@ package com.example.viewandlayout
 
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.transition.ChangeTransform
 import android.util.Log
 import android.view.View
-import android.widget.CheckBox
-import android.widget.Checkable
 import android.widget.Toast
 import com.example.viewandlayout.databinding.ActivityMainBinding
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
-import java.util.zip.CheckedInputStream
+import kotlin.time.Duration
 
 
+@Suppress("NAME_SHADOWING")
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -57,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.ANR.setOnClickListener {
+            it.postDelayed(delay(Duration), 10000)
             Toast.makeText(this@MainActivity, "Application not responsing", Toast.LENGTH_SHORT)
                 .show()
         }
@@ -110,11 +106,15 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                dialNumberPhone()
+                dialPhoneNumber()
             }
 
             override fun afterTextChanged(p0: Editable?) {}
         })
+    }
+
+    fun delay(timeMillis: Duration.Companion) {
+
     }
 
     override fun onStart() {
@@ -182,17 +182,25 @@ class MainActivity : AppCompatActivity() {
         }, 2000)
     }
 
-    fun dialNumberPhone() {
+    fun dialPhoneNumber() {
         binding.dialButton.setOnClickListener {
             val phoneNumber = binding.phoneNumberText.text.toString()
             val dialNumberIntent = Intent(Intent.ACTION_DIAL).apply {
-
+                data = Uri.parse("tel:$phoneNumber")
             }
             if (dialNumberIntent.resolveActivity(packageManager) != null) {
                 startActivity(dialNumberIntent)
             } else {
-                Toast.makeText(this@MainActivity, "No component to handle intent", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@MainActivity,
+                    "No component to handle intent",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
+}
+
+private fun View.postDelayed(delay: Unit, l: Long) {
+
 }
