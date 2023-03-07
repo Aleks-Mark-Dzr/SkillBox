@@ -188,15 +188,7 @@ class MainActivity : AppCompatActivity() {
             val dialNumberIntent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse("tel:$phoneNumber")
             }
-            if (dialNumberIntent.resolveActivity(packageManager) != null) {
                 startActivity(dialNumberIntent)
-            } else {
-                Toast.makeText(
-                    this@MainActivity,
-                    "No component to handle intent",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
         }
     }
 }
