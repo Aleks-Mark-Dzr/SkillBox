@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.ANR.setOnClickListener {
-            it.postDelayed(delay(Duration), 10000)
+            Thread.sleep(10_000)
             Toast.makeText(this@MainActivity, "Application not responsing", Toast.LENGTH_SHORT)
                 .show()
         }
