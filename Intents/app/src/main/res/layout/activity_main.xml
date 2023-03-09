@@ -115,10 +115,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Введите номер телефона"
-        app:layout_constraintBottom_toTopOf="@id/dialButton"
+        app:layout_constraintBottom_toTopOf="@id/resultDialNumberPhone"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/makeLoginButton" />
+
+    <EditText
+        android:id="@+id/resultDialNumberPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/phoneNumberText"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/dialButton"/>
 
     <Button
         android:id="@+id/dialButton"
@@ -128,7 +137,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumberText"/>
+        app:layout_constraintTop_toBottomOf="@+id/resultDialNumberPhone"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,13 @@
 package com.example.viewandlayout
 
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.os.Parcel
+import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -12,6 +15,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.viewandlayout.databinding.ActivityMainBinding
 import android.widget.CompoundButton
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.time.Duration
 
@@ -22,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val KEY_FORM = "form"
         private var state: FormState = FormState(valid = false, message = "")
+        private const val DIAL_REQUEST_CODE = 123
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -30,8 +35,12 @@ class MainActivity : AppCompatActivity() {
 
     private val tag = "MainActivity"
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        prepareCall(ActivityResultContract.)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -117,6 +126,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+//    private fun prepareCall(ActivityResultContract.)
+
     override fun onStart() {
         super.onStart()
         Log.v(tag, "onStart was called")
@@ -188,11 +199,25 @@ class MainActivity : AppCompatActivity() {
             val dialNumberIntent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse("tel:$phoneNumber")
             }
-                startActivity(dialNumberIntent)
+//            startActivity(dialNumberIntent)
+            startActivityForResult(dialNumberIntent, DIAL_REQUEST_CODE)
         }
     }
-}
 
-private fun View.postDelayed(delay: Unit, l: Long) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == DIAL_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                val resultDial = data?.getParcelableExtra<Parcelable>("Number") as? String
+//                binding.resultDialNumberPhone.
+            } else {
+                Toast.makeText(this, "Dial number was concelled", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
 
+    private fun View.postDelayed(delay: Unit, l: Long) {
+
+    }
 }
